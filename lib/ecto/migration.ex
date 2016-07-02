@@ -168,7 +168,7 @@ defmodule Ecto.Migration do
     @moduledoc """
     Defines a table struct used in migrations.
     """
-    defstruct name: nil, prefix: nil, primary_key: true, engine: nil, options: nil
+    defstruct name: nil, prefix: nil, comment: nil, primary_key: true, engine: nil, options: nil
     @type t :: %__MODULE__{name: atom, prefix: atom | nil, primary_key: boolean,
                            engine: atom, options: String.t}
   end

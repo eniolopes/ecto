@@ -628,6 +628,15 @@ defmodule Ecto.Adapters.PostgresTest do
     """ |> remove_newlines
   end
 
+  test "create table with comment" do
+    create = {:create, table(:posts, comment: "comment"),
+               [{:add, :category_0, references(:categories), []}]}
+    assert SQL.execute_ddl(create) == """
+    CREATE TABLE "posts"
+    ("category_0" integer CONSTRAINT "posts_category_0_fkey" REFERENCES "categories"("id")); COMMENT ON TABLE "posts" IS "comment"
+    """ |> remove_newlines
+  end
+
   test "create table with references" do
     create = {:create, table(:posts),
                [{:add, :id, :serial, [primary_key: true]},
